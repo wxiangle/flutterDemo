@@ -1,0 +1,17 @@
+{
+    "configurations": [
+      {
+        "name": "App (Devel)",
+        "type": "dart",
+        "request": "launch",
+        "cwd": "app/",
+        "program": "lib/googledevel.dart",
+        "args": [
+          "--no-sound-null-safety",
+          "--enable-experiment=non-nullable",
+          "--enable-experiment=nonfunction-type-aliases",
+          "--enable-experiment=constructor-tearoffs"
+        ]
+      }
+    ]
+  }
