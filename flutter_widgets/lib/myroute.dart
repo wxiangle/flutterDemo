@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets/Async_anim.dart';
 import 'package:flutter_widgets/animation.dart';
 import 'package:flutter_widgets/animation_builder.dart';
 import 'package:flutter_widgets/animation_widget.dart';
@@ -47,11 +48,12 @@ class FirstRoute extends StatelessWidget {
           children: [
             buildRouteButton(context),
             buildDialogButton(context),
-            buildListButton(context),
-            buildGridListButton(context),
-            buildAnimationButton(context),
-            buildWidgetAnimationButton(context),
-            buildBuilderAnimationButton(context),
+            buildDefaultButton(context, MyListPage(), '打开List列表'),
+            buildDefaultButton(context, MyGridPage(), '打开GridList列表'),
+            buildDefaultButton(context, BasicAnim(), '打开Animation'),
+            buildDefaultButton(context, WidgetAnim(), '打开Widget Animation'),
+            buildDefaultButton(context, BuilderAnim(), '打开Builder Animation'),
+            buildDefaultButton(context, AsyncAnim(), '打开Async Animation')
           ],
         ),
       ),
@@ -103,56 +105,16 @@ class FirstRoute extends StatelessWidget {
     );
   }
 
-  ElevatedButton buildListButton(BuildContext context) {
+
+  ElevatedButton buildDefaultButton(BuildContext context, Widget page,
+      String buttonText) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MyListPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => page));
       },
-      child: const Text('打开List列表'),
+      child: Text(buttonText),
     );
   }
-
-  ElevatedButton buildGridListButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MyGridPage()));
-      },
-      child: const Text('打开GridList列表'),
-    );
-  }
-
-  ElevatedButton buildAnimationButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => BasicAnim()));
-      },
-      child: const Text('打开Animation'),
-    );
-  }
-
-  ElevatedButton buildWidgetAnimationButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => WidgetAnim()));
-      },
-      child: const Text('打开Widget Animation'),
-    );
-  }
-
-  ElevatedButton buildBuilderAnimationButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => BuilderAnim()));
-      },
-      child: const Text('打开Builder Animation'),
-    );
-  }
-
 }
 
 class SecondRoute extends StatelessWidget {
@@ -207,7 +169,10 @@ class SecondRoute2 extends StatelessWidget {
 class SecondRoute3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute.of(context)?.settings.arguments ?? "";
+    final arg = ModalRoute
+        .of(context)
+        ?.settings
+        .arguments ?? "";
     return Scaffold(
       appBar: AppBar(
         title: const Text('second page 3'),
@@ -238,7 +203,10 @@ class SecondRoute4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute.of(context)?.settings.arguments ?? "";
+    final arg = ModalRoute
+        .of(context)
+        ?.settings
+        .arguments ?? "";
     return Scaffold(
       appBar: AppBar(
         title: const Text('second page 4'),
