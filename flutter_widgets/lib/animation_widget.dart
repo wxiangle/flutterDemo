@@ -24,14 +24,14 @@ class AnimWidget extends AnimatedWidget {
       child: SizedBox(
         width: animation.value,
         height: animation.value,
-        child: Image.network(
-            MyImages.image_ke_lala),
+        child: Image.network(MyImages.image_ke_lala),
       ),
     );
   }
 }
 
-class WidgetAnimState extends State<WidgetAnim> with SingleTickerProviderStateMixin {
+class WidgetAnimState extends State<WidgetAnim>
+    with SingleTickerProviderStateMixin {
   late Animation _animation;
   late AnimationController _animationController;
   late Tween<double> _tween;

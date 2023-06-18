@@ -34,30 +34,36 @@ final routeApp = MaterialApp(
   },
 );
 
+Widget defaultScaffold(Widget child, {String? title}) => Scaffold(
+      appBar: AppBar(
+        title: Text(title ?? 'Page'),
+      ),
+      body: child,
+    );
+
 class FirstRoute extends StatelessWidget {
   const FirstRoute({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('first page'),
+    return defaultScaffold(Center(
+      child: Column(
+        children: [
+          buildRouteButton(context),
+          buildDialogButton(context),
+          buildDefaultButton(context, MyListPage(), '打开List列表'),
+          buildDefaultButton(context, MyGridPage(), '打开GridList列表'),
+          buildDefaultButton(
+              context, defaultScaffold(BasicAnim()), '打开Animation'),
+          buildDefaultButton(
+              context, defaultScaffold(WidgetAnim()), '打开Widget Animation'),
+          buildDefaultButton(
+              context, defaultScaffold(BuilderAnim()), '打开Builder Animation'),
+          buildDefaultButton(
+              context, defaultScaffold(AsyncAnim()), '打开Async Animation')
+        ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            buildRouteButton(context),
-            buildDialogButton(context),
-            buildDefaultButton(context, MyListPage(), '打开List列表'),
-            buildDefaultButton(context, MyGridPage(), '打开GridList列表'),
-            buildDefaultButton(context, BasicAnim(), '打开Animation'),
-            buildDefaultButton(context, WidgetAnim(), '打开Widget Animation'),
-            buildDefaultButton(context, BuilderAnim(), '打开Builder Animation'),
-            buildDefaultButton(context, AsyncAnim(), '打开Async Animation')
-          ],
-        ),
-      ),
-    );
+    ));
   }
 
   ElevatedButton buildRouteButton(BuildContext context) {
@@ -105,9 +111,8 @@ class FirstRoute extends StatelessWidget {
     );
   }
 
-
-  ElevatedButton buildDefaultButton(BuildContext context, Widget page,
-      String buttonText) {
+  ElevatedButton buildDefaultButton(
+      BuildContext context, Widget page, String buttonText) {
     return ElevatedButton(
       onPressed: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => page));
@@ -169,10 +174,7 @@ class SecondRoute2 extends StatelessWidget {
 class SecondRoute3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute
-        .of(context)
-        ?.settings
-        .arguments ?? "";
+    final arg = ModalRoute.of(context)?.settings.arguments ?? "";
     return Scaffold(
       appBar: AppBar(
         title: const Text('second page 3'),
@@ -203,10 +205,7 @@ class SecondRoute4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute
-        .of(context)
-        ?.settings
-        .arguments ?? "";
+    final arg = ModalRoute.of(context)?.settings.arguments ?? "";
     return Scaffold(
       appBar: AppBar(
         title: const Text('second page 4'),
