@@ -22,7 +22,7 @@ class AsyncState extends State<AsyncAnim> with SingleTickerProviderStateMixin {
     _animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 3));
     _tween = Tween(begin: 0, end: 400);
-    _opacity = Tween(begin: 0, end: 0.5);
+    _opacity = Tween(begin: 0, end: 0.9);
 
     // _animation = _tween.animate(CurvedAnimation(
     //     parent: _animationController, curve: Curves.fastOutSlowIn));
@@ -34,20 +34,19 @@ class AsyncState extends State<AsyncAnim> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _animation,
-      builder: (BuildContext context, Widget? child) {
-        return Center();
-      },
-      child: Center(
-        child: Opacity(
-          opacity: _opacity.evaluate(_animation),
-          child: SizedBox(
-            width: _tween.evaluate(_animation),
-            height: _tween.evaluate(_animation),
-            child: Image.network(MyImages.image_ke_lala),
-          ),
-        ),
-      ),
+        animation: _animation,
+        builder: (BuildContext context, Widget? child) {
+          return Center(
+            child: Opacity(
+              opacity: _opacity.evaluate(_animation),
+              child: SizedBox(
+                width: _tween.evaluate(_animation),
+                height: _tween.evaluate(_animation),
+                child: Image.network(MyImages.image_ke_lala),
+              ),
+            ),
+          );
+        },
     );
   }
 }

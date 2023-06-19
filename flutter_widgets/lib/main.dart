@@ -1,21 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_widgets/mylist.dart';
-
-import 'animation.dart';
-import 'mygrid.dart';
 import 'myroute.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    myMaterialApp,
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  const MyApp({Key? key}) : super(key: key);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return routeApp;
+    return  myMaterialApp;
   }
 }
 

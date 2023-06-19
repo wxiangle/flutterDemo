@@ -1,17 +1,49 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_widgets/Async_anim.dart';
-import 'package:flutter_widgets/animation.dart';
-import 'package:flutter_widgets/animation_builder.dart';
-import 'package:flutter_widgets/animation_widget.dart';
-import 'package:flutter_widgets/dialog.dart';
+import 'package:flutter_widgets/animation/animation.dart';
+import 'package:flutter_widgets/dialog/dialog.dart';
 import 'package:flutter_widgets/mygrid.dart';
 import 'package:flutter_widgets/mylist.dart';
+import 'package:flutter_widgets/utils/images.dart';
+
+import 'animation/Async_anim.dart';
+import 'animation/animation_builder.dart';
+import 'animation/animation_route.dart';
+import 'animation/animation_widget.dart';
 
 final secondPageRoute = "/second_route";
 final secondRoute4 = "/second_route4";
 final firstPageRoute = "/";
 
-final routeApp = MaterialApp(
+final myCurpertinoApp = CupertinoApp(
+  localizationsDelegates: const <LocalizationsDelegate>[
+    DefaultMaterialLocalizations.delegate,
+    DefaultCupertinoLocalizations.delegate,
+    DefaultWidgetsLocalizations.delegate,
+  ],
+  home: CupertinoPageScaffold(
+    navigationBar: const CupertinoNavigationBar(
+      middle: Text('Cupertino App'),
+    ),
+    child: myCurpertinoPage(),
+  ),
+);
+
+class myCurpertinoPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: CupertinoButton(
+        child: Text('Show Alert'),
+        onPressed: () {
+          MyDialogs.showMaterialAlertDialog(context);
+        },
+      ),
+    );
+  }
+}
+
+final myMaterialApp = MaterialApp(
   title: 'Flutter Demo',
   theme: ThemeData(
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -60,10 +92,31 @@ class FirstRoute extends StatelessWidget {
           buildDefaultButton(
               context, defaultScaffold(BuilderAnim()), '打开Builder Animation'),
           buildDefaultButton(
-              context, defaultScaffold(AsyncAnim()), '打开Async Animation')
+              context, defaultScaffold(AsyncAnim()), '打开Async Animation'),
+          buildInkWellAvatar(context),
         ],
       ),
     ));
+  }
+
+  InkWell buildInkWellAvatar(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return defaultScaffold(RouteAnim());
+        }));
+      },
+      child: Hero(
+          tag: 'avatar',
+          child: ClipOval(
+            child: Image.network(
+              MyImages.image_ke_lala,
+              fit: BoxFit.fitHeight,
+              width: 50,
+              height: 50,
+            ),
+          )),
+    );
   }
 
   ElevatedButton buildRouteButton(BuildContext context) {
@@ -84,7 +137,7 @@ class FirstRoute extends StatelessWidget {
         Navigator.push(
             context,
             PageRouteBuilder(
-                transitionDuration: const Duration(milliseconds: 800),
+                transitionDuration: const Duration(milliseconds: 500),
                 pageBuilder: (BuildContext context, Animation<double> animation,
                     Animation<double> secondaryAnimation) {
                   return FadeTransition(
