@@ -6,10 +6,11 @@ import 'package:flutter_widgets/mygrid.dart';
 import 'package:flutter_widgets/mylist.dart';
 import 'package:flutter_widgets/utils/images.dart';
 
-import 'animation/Async_anim.dart';
+import 'animation/async_anim.dart';
 import 'animation/animation_builder.dart';
 import 'animation/animation_route.dart';
 import 'animation/animation_widget.dart';
+import 'animation/stagger.dart';
 
 final secondPageRoute = "/second_route";
 final secondRoute4 = "/second_route4";
@@ -90,20 +91,25 @@ class FirstRoute extends StatelessWidget {
           buildDefaultButton(
               context, defaultScaffold(WidgetAnim()), '打开Widget Animation'),
           buildDefaultButton(
-              context, defaultScaffold(BuilderAnim()), '打开Builder Animation'),
-          buildDefaultButton(
-              context, defaultScaffold(AsyncAnim()), '打开Async Animation'),
+              context,
+              defaultScaffold(BuilderAnim(), title: 'builder 构建动画'),
+              '打开Builder Animation'),
+          buildDefaultButton(context,
+              defaultScaffold(AsyncAnim(), title: '同步动画'), '打开Async Animation'),
           buildInkWellAvatar(context),
+          buildDefaultButton(
+              context, defaultScaffold(StaggerF(), title: '交织动画'), '打开交织动画')
         ],
       ),
     ));
   }
 
+  /// Hero动画
   InkWell buildInkWellAvatar(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return defaultScaffold(RouteAnim());
+          return defaultScaffold(RouteAnim(), title: '路由动画');
         }));
       },
       child: Hero(
@@ -168,7 +174,17 @@ class FirstRoute extends StatelessWidget {
       BuildContext context, Widget page, String buttonText) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+        ///不带动画
+        // Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+        // Navigator.push(context,  CupertinoPageRoute(builder: (context) => page));
+        ///带有动画
+        Navigator.push(context, PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+          return FadeTransition(
+            opacity: animation,
+            child: page,
+          );
+        }));
       },
       child: Text(buttonText),
     );
