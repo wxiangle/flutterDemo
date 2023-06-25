@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets/animation/animation.dart';
 import 'package:flutter_widgets/dialog/dialog.dart';
+import 'package:flutter_widgets/gesture/gesture_page.dart';
 import 'package:flutter_widgets/mygrid.dart';
 import 'package:flutter_widgets/mylist.dart';
 import 'package:flutter_widgets/utils/images.dart';
@@ -11,6 +12,8 @@ import 'animation/animation_builder.dart';
 import 'animation/animation_route.dart';
 import 'animation/animation_widget.dart';
 import 'animation/stagger.dart';
+import 'gesture/gesture_page2.dart';
+import 'gesture/tapgesture_page.dart';
 
 final secondPageRoute = "/second_route";
 final secondRoute4 = "/second_route4";
@@ -98,7 +101,10 @@ class FirstRoute extends StatelessWidget {
               defaultScaffold(AsyncAnim(), title: '同步动画'), '打开Async Animation'),
           buildInkWellAvatar(context),
           buildDefaultButton(
-              context, defaultScaffold(StaggerF(), title: '交织动画'), '打开交织动画')
+              context, defaultScaffold(StaggerF(), title: '交织动画'), '打开交织动画'),
+          buildDefaultButton(context, GesturePage(), '手势'),
+          buildDefaultButton(context, TapGesturePage(), '手势2'),
+          buildDefaultButton(context, GesturePage3(), '手势3')
         ],
       ),
     ));
