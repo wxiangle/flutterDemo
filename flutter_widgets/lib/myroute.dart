@@ -5,6 +5,7 @@ import 'package:flutter_widgets/dialog/dialog.dart';
 import 'package:flutter_widgets/gesture/gesture_page.dart';
 import 'package:flutter_widgets/mygrid.dart';
 import 'package:flutter_widgets/mylist.dart';
+import 'package:flutter_widgets/sp/my_sp_demo.dart';
 import 'package:flutter_widgets/utils/images.dart';
 
 import 'animation/async_anim.dart';
@@ -104,7 +105,8 @@ class FirstRoute extends StatelessWidget {
               context, defaultScaffold(StaggerF(), title: '交织动画'), '打开交织动画'),
           buildDefaultButton(context, GesturePage(), '手势'),
           buildDefaultButton(context, TapGesturePage(), '手势2'),
-          buildDefaultButton(context, GesturePage3(), '手势3')
+          buildDefaultButton(context, GesturePage3(), '手势3'),
+          buildDefaultButton(context, SpTestPage(), '持久化')
         ],
       ),
     ));
