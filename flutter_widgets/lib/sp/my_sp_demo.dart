@@ -19,7 +19,7 @@ class SpTestPageState extends State<SpTestPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("持久化"),
+        title: const Text("持久化"),
       ),
       body: Column(
         children: [
