@@ -8,6 +8,7 @@ import 'package:flutter_widgets/mylist.dart';
 import 'package:flutter_widgets/sp/my_sp_demo.dart';
 import 'package:flutter_widgets/utils/images.dart';
 
+import 'animation/animation2.dart';
 import 'animation/async_anim.dart';
 import 'animation/animation_builder.dart';
 import 'animation/animation_route.dart';
@@ -100,6 +101,8 @@ class FirstRoute extends StatelessWidget {
               '打开Builder Animation'),
           buildDefaultButton(context,
               defaultScaffold(AsyncAnim(), title: '同步动画'), '打开Async Animation'),
+          buildDefaultButton(context,
+              defaultScaffold(const AnimatedContainerDemo(), title: '隐式动画'), '打开 Animation2'),
           buildInkWellAvatar(context),
           buildDefaultButton(
               context, defaultScaffold(StaggerF(), title: '交织动画'), '打开交织动画'),
